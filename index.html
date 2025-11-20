@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MADS Studio - Student Game Developers</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    /* Global */
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        scroll-behavior: smooth;
+        background: #0b0b0b;
+        color: #f5f5f5;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    /* Hero Section */
+    .hero {
+        position: relative;
+        height: 100vh;
+        background: url('https://source.unsplash.com/1600x900/?futuristic,city') center/cover no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+    }
+    .hero::after {
+        content: '';
+        position: absolute;
+        top:0; left:0; width:100%; height:100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1;
+    }
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+        animation: fadeIn 2s ease-in-out;
+    }
+    .hero-content h1 {
+        font-size: 4rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+        letter-spacing: 2px;
+    }
+    .hero-content p {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        line-height: 1.4;
+    }
+
+    /* Logo */
+    .logo {
+        width: 120px;
+        margin-bottom: 2rem;
+        transition: transform 0.3s;
+    }
+    .logo:hover {
+        transform: rotate(-10deg) scale(1.1);
+    }
+
+    button {
+    
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: linear-gradient(145deg, #5a0000, #c40000);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.25s ease;
+  box-shadow: 
+    0 0 12px rgba(255, 0, 0, 0.25),
+    inset 0 0 6px rgba(0, 0, 0, 0.6);
+}
+
+
+button:hover {
+  background: linear-gradient(145deg, #d00000, #5a0000);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 0 20px rgba(255, 0, 0, 0.45),
+    inset 0 0 4px rgba(0, 0, 0, 0.7);
+}
+
+button:active {
+  transform: scale(0.97);
+  box-shadow:
+    0 0 8px rgba(255, 50, 50, 0.3),
+    inset 0 0 8px rgba(0, 0, 0, 0.8);
+}
+
+
+    /* Cards */
+    .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+    .card-hover img {
+        transition: transform 0.3s;
+    }
+    .card-hover:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from {opacity:0; transform: translateY(20px);}
+        to {opacity:1; transform: translateY(0);}
+    }
+
+    /* Modals */
+    .modal-body img {
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Footer */
+    footer {
+        background: #111;
+        color: #888;
+        padding: 2rem 0;
+        text-align: center;
+    }
+    .mads-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.9;
+  margin-top: 10px;
+}
+
+.mads-main {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #d8d8d8;
+  letter-spacing: 2px;
+}
+
+.mads-main .mads-s {
+  margin-left: 6px;
+}
+
+.mads-sub {
+  margin-top: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: #d8d8d8;
+}
+
+.future-section {
+  padding: 80px 0;
+  background: #0d0d0d;
+  color: #e4e4e4;
+  text-align: center;
+}
+
+.future-section .section-title {
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+
+.future-intro {
+  max-width: 850px;
+  margin: 0 auto 50px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.engine-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.engine-card {
+  background: #111;
+  padding: 30px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.1);
+  transition: 0.3s ease;
+}
+
+.engine-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.25);
+}
+
+.engine-img {
+  width: 90px;
+  margin-bottom: 15px;
+}
+
+.future-bottom-text {
+  margin-top: 40px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.15rem;
+  opacity: 0.85;
+  .hero-btn.angry-style-1 {
+    position: relative;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: linear-gradient(270deg, #ff0000, #ff4500, #ff0000);
+    background-size: 600% 600%;
+    animation: angry-gradient 2s linear infinite;
+}
+
+/* Hover effects */
+.hero-btn.angry-style-1:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+}
+
+/* Animated gradient keyframes */
+@keyframes angry-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <img src="assets/madslogo.png" alt="MADS Studio Logo" class="logo">
+
+        <h1 class="mads-title">
+            <span class="mads-main">MAD<span class="mads-s">S</span></span>
+            <span class="mads-sub">STUDIO</span>
+        </h1>
+
+        <p>Student-driven game development studio. Crafting unique experiences and building our legacy, one title at a time.</p>
+
+        <button class="hero-btn angry-style-1" onclick="location.href='#projects'">
+    Explore Our Projects
+</button>
+
+</section>
+
+<section id="future" class="future-section">
+    <div class="container">
+        <h2 class="section-title">Looking Ahead</h2>
+        
+        <p class="future-intro">
+            MADS Studio is a student-driven game development team building its identity, 
+            experience, and portfolio one project at a time. Our team is focused on growing 
+            into a fully realized production studio capable of delivering polished, memorable, 
+            and mechanically rich titles.
+            <br><br>
+            We continue exploring real industry pipelines: gameplay prototypes, engine workflows, 
+            animation systems, AI behavior, lighting, narrative development, and team production structure. 
+            Every project helps us sharpen our skills and push our creative identity forward.
+        </p>
+
+        <div class="engine-grid">
+
+            <!-- Unity Card -->
+            <div class="engine-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/5969/5969294.png" alt="Unity Engine" class="engine-img">
+                <h3>Unity Engine</h3>
+                <p>
+                    Unity allows us to quickly prototype gameplay, build 2D and 3D hybrids, 
+                    explore procedural generation, and develop mobile-ready projects with speed and flexibility.
+                </p>
+            </div>
+
+            <!-- Unreal Card -->
+            <div class="engine-card">
+                <img src="https://www.citypng.com/public/uploads/preview/unreal-engine-black-logo-icon-png-701751694969791yzh1krpqaa.png" alt="Unreal Engine" class="engine-img">
+                <h3>Unreal Engine 5</h3>
+                <p>
+                    Unreal gives us access to high-end visuals, cinematic tools, advanced lighting systems, 
+                    and next-gen development workflows for more ambitious projects.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="future-bottom-text">
+            <p>
+                Our long-term vision is to launch fully playable titles across multiple platforms 
+                while building a distinct creative style.  
+                From experimental prototypes to narrative experiences, MADS Studio aims to leave a mark 
+                in the indie and student development scene — one game at a time.
+                <br><br>
+                This is just the beginning.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="container my-5">
+    <h2 class="text-center mb-5 fw-bold">Our Games</h2>
+    <div class="row g-4">
+        <!-- Mad Dice -->
+        <div class="col-md-4">
+            <div class="card card-hover shadow-sm bg-dark text-light border-0">
+                <img src="./assets/diceGame.png" class="card-img-top" alt="diceGame">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">Mad Dice</h5>
+                    <p class="card-text">Roll the dice and conquer challenges in a strategic adventure.</p>
+                    <button class="hero-btn angry-style-1" data-bs-toggle="modal" data-bs-target="#madDiceModal">Learn More
+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Neon Janitor -->
+        <div class="col-md-4">
+            <div class="card card-hover shadow-sm bg-dark text-light border-0">
+                <img src="https://source.unsplash.com/random/400x250/?neon,city" class="card-img-top" alt="Neon Janitor">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">Neon Janitor</h5>
+                    <p class="card-text">Navigate a glowing cityscape while solving puzzles and cleaning chaos.</p>
+                    <button class="hero-btn angry-style-1" data-bs-toggle="modal" data-bs-target="#madDiceModal">Learn More
+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Thief -->
+        <div class="col-md-4">
+            <div class="card card-hover shadow-sm bg-dark text-light border-0">
+                <img src="https://source.unsplash.com/random/400x250/?colorful,art" class="card-img-top" alt="Color Thief">
+                <div class="card-body text-center">
+                    <h5 class="hero-btn angry-style-1">Color Thief</h5>
+                    <p class="card-text">Steal colors and rewrite reality in a stealth-driven world.</p>
+                    <button class="hero-btn angry-style-1" data-bs-toggle="modal" data-bs-target="#madDiceModal">Learn More
+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</section>
+
+
+
+<!-- Contact Form -->
+<section id="contact" class="container py-5">
+    <h2 class="text-center fw-bold mb-4">Contact Us</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form id="contact-form">
+                <div class="mb-3">
+                    <label for="name" class="form-label fw-bold">Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label fw-bold">Message</label>
+                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-gradient btn-lg">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Modals -->
+<!-- Mad Dice Modal -->
+<div class="modal fade" id="madDiceModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4 bg-dark text-light">
+            <div class="modal-header bg-gradient text-light rounded-top-4">
+                <h5 class="modal-title fw-bold">Mad Dice (In Development)</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <img src="https://source.unsplash.com/random/800x400/?dice,game" class="img-fluid mb-4" alt="Mad Dice">
+                <p class="lead">Roll the dice and conquer challenges! Each roll shapes your strategy as you face unpredictable enemies and obstacles. Early development targets PC and Console release.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Neon Janitor Modal -->
+<div class="modal fade" id="neonJanitorModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4 bg-dark text-light">
+            <div class="modal-header bg-gradient text-light rounded-top-4">
+                <h5 class="modal-title fw-bold">Neon Janitor (In Development)</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <img src="https://source.unsplash.com/random/800x400/?neon,city" class="img-fluid mb-4" alt="Neon Janitor">
+                <p class="lead">Step into a glowing world as a janitor with neon flair! Clean, fix, and interact with vibrant objects to solve puzzles and progress through a colorful cityscape.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Color Thief Modal -->
+<div class="modal fade" id="colorThiefModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4 bg-dark text-light">
+            <div class="modal-header bg-gradient text-light rounded-top-4">
+                <h5 class="modal-title fw-bold">Color Thief (In The Works)</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <img src="https://source.unsplash.com/random/800x400/?colorful,art" class="img-fluid mb-4" alt="Color Thief">
+                <p class="lead">In a world of stolen hues, become the ultimate thief. Use color-based stealth to evade detection and rewrite reality. Early Godot development targets a 2025 release.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p class="mb-0">&copy; 2025 MADS Studio. All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thanks for reaching out! (This is a demo—integrate with a backend for real submissions.)');
+    });
+</script>
+
+</body>
+</html>
